@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f6" />
+    <meta name="description" content="A calm, private workspace for tracking internship applications." />
+    <link rel="icon" href="data:," />
+    <title>Internship OS — Your search, in one place</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Internship OS home"><span class="brand-mark">i.</span><span>internship<span class="brand-light">OS</span></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a class="nav-item active" href="#applications" aria-current="page"><span class="nav-icon">▦</span> Applications <span class="nav-count" id="nav-total">0</span></a>
+          <button class="nav-item" id="saved-nav"><span class="nav-icon">☆</span> Saved roles</button>
+          <a class="nav-item" href="#follow-ups"><span class="nav-icon">◷</span> Follow-ups <span class="nav-dot" id="follow-nav-dot"></span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="privacy-card"><span class="privacy-icon">◈</span><div><strong>Your data stays yours</strong><p>Saved on this device only.</p></div></div>
+          <div class="profile"><div class="avatar">Y</div><div class="profile-copy"><strong>Your workspace</strong><span>Student plan</span></div><button class="icon-button export-button" title="Export your data" aria-label="Export your data">⇩</button></div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="applications">
+        <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Applications</strong></div><div class="topbar-actions"><span class="local-badge"><span></span> Private workspace</span><button class="help-button" id="help-button" aria-label="About this MVP">?</button></div></header>
+        <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR CAREER, IN PROGRESS</div><h1>Make your next move.</h1><p class="page-subtitle">A little clarity goes a long way. Keep every opportunity moving.</p></div><button class="button button-primary" id="open-add"><span>＋</span> Add an opportunity</button></section>
+
+        <section class="stats-grid" aria-label="Application summary">
+          <article class="stat-card"><div class="stat-label">TOTAL OPPORTUNITIES <span class="stat-icon lavender">▤</span></div><div class="stat-value" id="stat-total">0</div><div class="stat-note">Roles on your radar</div></article>
+          <article class="stat-card"><div class="stat-label">IN PROGRESS <span class="stat-icon mint">↗</span></div><div class="stat-value" id="stat-progress">0</div><div class="stat-note">Applications moving forward</div></article>
+          <article class="stat-card"><div class="stat-label">INTERVIEWS <span class="stat-icon peach">◉</span></div><div class="stat-value" id="stat-interviews">0</div><div class="stat-note">Conversations started</div></article>
+          <article class="stat-card stat-card-follow"><div class="stat-label">NEEDS A FOLLOW-UP <span class="stat-icon yellow">◷</span></div><div class="stat-value" id="stat-followups">0</div><div class="stat-note">A thoughtful nudge can help</div></article>
+        </section>
+
+        <section class="board-section" aria-label="Application pipeline">
+          <div class="board-toolbar"><div class="view-switch"><button class="view-button selected" id="board-view">▦ <span>Pipeline</span></button><button class="view-button" id="list-view">☷ <span>List</span></button></div><div class="toolbar-right"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search roles..." aria-label="Search roles" /></label><select id="sort-select" aria-label="Sort opportunities"><option value="updated">Recently updated</option><option value="company">Company A–Z</option><option value="followup">Follow-up soon</option></select></div></div>
+          <div class="board" id="board"></div>
+          <div class="list-wrap hidden" id="list-wrap"></div>
+          <div class="empty-state hidden" id="empty-state"><div class="empty-art"><span>✳</span><i>＋</i></div><h2>Your next opportunity starts here.</h2><p>Save a role you’re excited about. We’ll help you keep the details—and the next step—in view.</p><button class="button button-primary" id="empty-add">Add your first role <span>→</span></button><div class="empty-footnote">No application data yet. Your workspace is ready when you are.</div></div>
+        </section>
+        <footer class="page-footer"><span>Made for the in-between moments of a job search.</span><span>INTERNOS <span class="footer-dot">·</span> PREVIEW</span></footer>
+      </main>
+    </div>
+
+    <dialog class="modal" id="job-modal" aria-labelledby="modal-title">
+      <form id="job-form" class="modal-form" method="dialog">
+        <div class="modal-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> KEEP THE MOMENTUM</div><h2 id="modal-title">Add an opportunity</h2><p>Start with a link or fill in the details you know.</p></div><button class="icon-button close-button" type="button" aria-label="Close dialog">×</button></div>
+        <label class="field-label" for="job-url">JOB POSTING LINK <span class="optional">OPTIONAL</span></label><div class="url-field"><span>↗</span><input id="job-url" name="url" type="url" placeholder="https://company.com/careers/role" /><button type="button" id="extract-button" class="extract-button">Read details</button></div><div class="field-hint" id="extract-hint">Paste a link or job description below. Details are extracted in your browser.</div>
+        <label class="field-label" for="job-description">JOB DESCRIPTION <span class="optional">OPTIONAL</span></label><textarea id="job-description" name="description" rows="3" placeholder="Paste the role description here to keep a copy with your application..."></textarea>
+        <div class="field-grid"><div><label class="field-label" for="job-title">ROLE TITLE <span class="required">*</span></label><input id="job-title" name="title" required placeholder="e.g. Machine Learning Intern" /></div><div><label class="field-label" for="job-company">COMPANY <span class="required">*</span></label><input id="job-company" name="company" required placeholder="e.g. Acme Labs" /></div></div>
+        <div class="field-grid"><div><label class="field-label" for="job-location">LOCATION</label><input id="job-location" name="location" placeholder="Remote, Bengaluru..." /></div><div><label class="field-label" for="job-deadline">APPLICATION DEADLINE</label><input id="job-deadline" name="deadline" type="date" /></div></div>
+        <div class="field-grid"><div><label class="field-label" for="job-status">STATUS</label><select id="job-status" name="status"><option value="saved">Saved</option><option value="applied">Applied</option><option value="interview">Interview</option><option value="offer">Offer</option><option value="closed">Closed</option></select></div><div><label class="field-label" for="job-followup">FOLLOW-UP DATE</label><input id="job-followup" name="followUp" type="date" /></div></div>
+        <label class="field-label" for="job-resume">RESUME VERSION / NOTES</label><input id="job-resume" name="resume" placeholder="e.g. ML-focused resume · v2" />
+        <div class="duplicate-notice hidden" id="duplicate-notice">A similar role is already in your workspace. You can still save this one.</div>
+        <div class="modal-actions"><button class="button button-quiet cancel-button" type="button">Cancel</button><button class="button button-primary" type="submit"><span id="save-label">Save opportunity</span> <span>→</span></button></div>
+      </form>
+    </dialog>
+
+    <dialog class="modal detail-modal" id="detail-modal" aria-labelledby="detail-title"><div class="detail-content" id="detail-content"></div></dialog>
+    <dialog class="modal help-modal" id="help-modal"><div class="help-content"><button class="icon-button close-button help-close" aria-label="Close">×</button><div class="eyebrow"><span class="eyebrow-line"></span> A SMALL, USEFUL TOOL</div><h2>Built for your next step.</h2><p>This preview helps you collect roles, track applications, and remember follow-ups. Your information is saved in this browser on this device.</p><div class="help-callout"><strong>About “Read details”</strong><span>It looks for common job-title and company patterns in text you paste. It does not use an AI model or fetch information from job pages. Please review everything before saving.</span></div><p class="help-limit">This preview makes no external requests. It is an early MVP: no account sync, email integration, or automated application tracking yet.</p></div></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
